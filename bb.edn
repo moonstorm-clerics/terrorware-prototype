@@ -7,7 +7,7 @@
 
   :init
   (do
-    (def game-name "overculted")
+    (def game-name "terrorware")
     (log "bb.edn running task"))
 
   watch tasks/watch

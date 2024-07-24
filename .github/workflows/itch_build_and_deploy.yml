@@ -33,14 +33,14 @@ jobs:
       - name: Windows Build
         run: |
           mkdir -v -p dist/windows
-          godot --headless -v --export-debug Windows dist/windows/overculted.exe || exit 0
+          godot --headless -v --export-debug Windows dist/windows/terrorware.exe || exit 0
       - name: Sanity check
         run: |
           ls -alh dist/
           ls -alh dist/windows
-          stat dist/windows/overculted.exe
+          stat dist/windows/terrorware.exe
       - name: Deploy windows to itch.io
-        run: BUTLER_API_KEY=${{ secrets.BUTLER_API_KEY }} butler push dist/windows moonstorm-clerics/overculted-prototype:windows
+        run: BUTLER_API_KEY=${{ secrets.BUTLER_API_KEY }} butler push dist/windows moonstorm-clerics/terrorware-prototype:windows
 
 
   export-linux:
@@ -72,14 +72,14 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -v -p dist/linux
-          godot --headless -v --export-debug Linux dist/linux/overculted.x86_64 || exit 0
+          godot --headless -v --export-debug Linux dist/linux/terrorware.x86_64 || exit 0
       - name: Sanity check
         run: |
           ls -alh dist/
           ls -alh dist/linux
-          stat dist/linux/overculted.x86_64
+          stat dist/linux/terrorware.x86_64
       - name: Deploy linux to itch.io
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/linux moonstorm-clerics/overculted-prototype:linux
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/linux moonstorm-clerics/terrorware-prototype:linux
 
   export-web:
     name: Web Export
@@ -116,8 +116,8 @@ jobs:
           ls -alh dist/
           ls -alh dist/web
           stat dist/web/index.html
-      - name: Deploy web build to itch.io (overculted)
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/web moonstorm-clerics/overculted-prototype:html5
+      - name: Deploy web build to itch.io (terrorware)
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/web moonstorm-clerics/terrorware-prototype:html5
 
   # export-mac:
   #   name: Mac Export
@@ -148,11 +148,11 @@ jobs:
   #     - name: Mac Build
   #       run: |
   #         mkdir -v -p dist/macos
-  #         godot --headless -v --export-debug macos dist/macos/overculted.dmg || exit 0
+  #         godot --headless -v --export-debug macos dist/macos/terrorware.dmg || exit 0
   #     - name: Sanity check
   #       run: |
   #         ls -alh dist/
   #         ls -alh dist/macos
-  #         stat dist/macos/overculted.dmg
+  #         stat dist/macos/terrorware.dmg
   #     - name: Deploy mac build to itch.io
-  #       run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/macos moonstorm-clerics/overculted-prototype:macos
+  #       run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/macos moonstorm-clerics/terrorware-prototype:macos
