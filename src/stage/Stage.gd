@@ -8,6 +8,7 @@ class_name Stage
 @onready var lives_label = $%LivesLabel
 
 @onready var stage_ui = $%StageUI
+@onready var village = $%Village
 @onready var game_container = $%MicroGameContainer
 
 @export var micro_games: Array[PackedScene] = []
@@ -59,7 +60,8 @@ func start_microgame(game_node):
 
 	directive_label.text = "[center]%s[/center]" % game_node.directive
 
-	await Anim.fade_out(stage_ui, transition_t)
+	Anim.fade_out(stage_ui, transition_t)
+	await Anim.fade_out(village, transition_t)
 
 	game_container.add_child(game_node)
 	game_container.set_process_mode(PROCESS_MODE_INHERIT)
@@ -94,6 +96,7 @@ func exit_microgame():
 	Engine.set_time_scale(1.0)
 	U.remove_children(game_container)
 
+	Anim.fade_in(village, transition_t)
 	await Anim.fade_in(stage_ui, transition_t)
 
 	# TODO update stage based on won/lost count
@@ -107,9 +110,9 @@ func exit_microgame():
 func on_game_won():
 	Log.pr("marking game won!")
 	outcome = Outcome.WON
-	# exit_microgame()
+	# TODO you win! sound and visual notif
 
 func on_game_lost():
 	Log.pr("marking game lost!")
 	outcome = Outcome.LOST
-	# exit_microgame()
+	# TODO you lose! sound and visual notif
