@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://r4m46vr1ic2e"]
+
+[ext_resource type="Script" path="res://src/stage/Stage.gd" id="1_7hh2t"]
+[ext_resource type="PackedScene" uid="uid://cm5qaab022xay" path="res://src/microgames/ChantToYourGod.tscn" id="2_8i8hl"]
+[ext_resource type="PackedScene" uid="uid://d80fhop3dves" path="res://src/microgames/PrayToYourGod.tscn" id="3_jjqn3"]
+[ext_resource type="PackedScene" uid="uid://xeg1niv7uyo8" path="res://src/microgames/SacrificeVillager.tscn" id="4_t6f5i"]
+[ext_resource type="PackedScene" uid="uid://ng1abxpgf6hd" path="res://src/microgames/SacrificeYourself.tscn" id="5_1ade2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_som5x"]
+
+[node name="Stage" type="Node"]
+script = ExtResource("1_7hh2t")
+micro_games = Array[PackedScene]([ExtResource("2_8i8hl"), ExtResource("3_jjqn3"), ExtResource("4_t6f5i"), ExtResource("5_1ade2")])
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_som5x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MicroGameContainer" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="StageUI" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StageUI"]
+layout_mode = 2
