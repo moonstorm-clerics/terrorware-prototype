@@ -19,6 +19,8 @@ static func slide_in(node, dist=10, t=0.6):
 	tween.parallel().tween_property(node, "position", og_position, t)\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
+	return node.get_tree().create_timer(t).timeout
+
 static func slide_out(node, t=0.6):
 	var og_position = node.current_position() if node.has_method("current_position") else node.position
 	var target_position = og_position - Vector2.ONE * 10
@@ -33,6 +35,8 @@ static func slide_out(node, t=0.6):
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(node, "modulate:a", 0.0, t)\
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	return node.get_tree().create_timer(t).timeout
 
 static func slide_from_point(node, pos=Vector2.ZERO, t=0.6, delay_ts=[]):
 	var delay_t = U.rand_of(delay_ts)
@@ -55,6 +59,8 @@ static func slide_from_point(node, pos=Vector2.ZERO, t=0.6, delay_ts=[]):
 	tween.parallel().tween_property(node, "modulate:a", 1.0, t)\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
+	return node.get_tree().create_timer(t).timeout
+
 static func slide_to_point(node, target_position=Vector2.ZERO, t=0.6, delay_ts=[]):
 	var delay_t = U.rand_of(delay_ts)
 
@@ -70,6 +76,8 @@ static func slide_to_point(node, target_position=Vector2.ZERO, t=0.6, delay_ts=[
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	tween.parallel().tween_property(node, "modulate:a", 0.0, t)\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+
+	return node.get_tree().create_timer(t).timeout
 
 # helper
 
@@ -91,12 +99,16 @@ static func move_to_coord(node, coord, t, trans=Tween.TRANS_CUBIC, _ease=Tween.E
 		return
 	tween.tween_property(node, "position", target_pos, t).set_trans(trans).set_ease(_ease)
 
+	return node.get_tree().create_timer(t).timeout
+
 static func move_attempt_pull_back(node, og_position, target_position, t):
 	var tween = tween_on_node(node, "move_tween")
 	if not tween:
 		return
 	tween.tween_property(node, "position", target_position, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(node, "position", og_position, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	return node.get_tree().create_timer(t).timeout
 
 static func float_a_bit(node, og_position, t=0.8, trans=Tween.TRANS_CUBIC, _ease=Tween.EASE_OUT):
 	var tween = tween_on_node(node, "float_tween")
@@ -111,6 +123,8 @@ static func float_a_bit(node, og_position, t=0.8, trans=Tween.TRANS_CUBIC, _ease
 	tween.tween_interval(t/3)
 	tween.tween_callback(Anim.float_a_bit.bind(node, og_position, t, trans, _ease))
 
+	return node.get_tree().create_timer(t).timeout
+
 # Scales
 
 static func scale_up_down_up(node, t):
@@ -120,6 +134,7 @@ static func scale_up_down_up(node, t):
 	tween.tween_property(node, "scale", 1.3*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(node, "scale", 0.8*Vector2.ONE, t/4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(node, "scale", 1.0*Vector2.ONE, t/4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	return node.get_tree().create_timer(t).timeout
 
 static func scale_down_up(node, t):
 	var tween = tween_on_node(node, "scale_tween")
@@ -127,6 +142,7 @@ static func scale_down_up(node, t):
 		return
 	tween.tween_property(node, "scale", 0.8*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(node, "scale", 1.0*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	return node.get_tree().create_timer(t).timeout
 
 static func scale_up_down(node, t):
 	var tween = tween_on_node(node, "scale_tween")
@@ -134,6 +150,7 @@ static func scale_up_down(node, t):
 		return
 	tween.tween_property(node, "scale", 1.3*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(node, "scale", 1.0*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	return node.get_tree().create_timer(t).timeout
 
 # fade
 
@@ -142,12 +159,14 @@ static func fade_in(node, t=0.5):
 	if not tween:
 		return
 	tween.tween_property(node, "modulate:a", 1.0, t).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	return node.get_tree().create_timer(t).timeout
 
 static func fade_out(node, t=0.5):
 	var tween = tween_on_node(node, "fade_tween")
 	if not tween:
 		return
 	tween.tween_property(node, "modulate:a", 0.0, t).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	return node.get_tree().create_timer(t, true, false, true).timeout
 
 ## whole scene transitions ###########################################################
 

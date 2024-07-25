@@ -3,14 +3,17 @@ class_name Stage
 
 ## vars ################################################
 
-@onready var stage_ui = $%StageUI
 @onready var directive_label = $%DirectiveLabel
+@onready var level_label = $%LevelLabel
+@onready var lives_label = $%LivesLabel
+
+@onready var stage_ui = $%StageUI
 @onready var game_container = $%MicroGameContainer
 
 @export var micro_games: Array[PackedScene] = []
 
 var game_t = 4.0
-var transition_t = 4.0
+var transition_t = 0.8
 
 enum State {STAGE, MICROGAME}
 enum Outcome {WON, LOST}
@@ -20,12 +23,12 @@ var outcome
 
 var won_count = 0
 var lost_count = 0
+var lives = 4
 
 ## ready ################################################
 
 func _ready():
 	Log.pr("stage ready.....")
-	game_container.set_process_mode(PROCESS_MODE_DISABLED)
 	directive_label.set_visible(false)
 
 	start_next_game()
@@ -33,9 +36,12 @@ func _ready():
 ## start/end microgame ################################################
 
 func start_next_game():
-	# TODO drop, do some animation, etc
-	await get_tree().create_timer(1.0).timeout
+	# TODO animations/presentation, etc
+	level_label.text = "[center]# %s[/center]" % (won_count + lost_count + 1)
 
+	await Anim.scale_up_down_up(level_label, 0.8)
+
+	game_container.set_process_mode(PROCESS_MODE_DISABLED)
 	var game_scene = U.rand_of(micro_games)
 	var game_node = game_scene.instantiate()
 	start_microgame(game_node)
@@ -70,6 +76,10 @@ func exit_microgame():
 		return
 	Log.pr("Exiting microgame")
 
+	# TODO time up sound
+
+	Engine.set_time_scale(0.5)
+
 	match outcome:
 		Outcome.WON:
 			won_count += 1
@@ -81,12 +91,14 @@ func exit_microgame():
 	state = State.STAGE
 
 	await Anim.fade_out(game_container.get_children()[0], transition_t)
+	Engine.set_time_scale(1.0)
 	U.remove_children(game_container)
 
 	await Anim.fade_in(stage_ui, transition_t)
 
 	# TODO update stage based on won/lost count
 	Log.pr("won", won_count, "lost", lost_count)
+	lives_label.text = "[center]Lives: %s[/center]" % (lives - lost_count)
 
 	start_next_game()
 
