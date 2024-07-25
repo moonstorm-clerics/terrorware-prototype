@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://xeg1niv7uyo8"]
 
+[ext_resource type="Script" path="res://src/microgames/SacrificeVillager.gd" id="1_a7gpj"]
 [ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="1_jpuv4"]
-[ext_resource type="Script" path="res://src/microgames/MicroGame.gd" id="1_qwmfr"]
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="2_kw8lm"]
 [ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/core/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="3_ea7bd"]
 [ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/entities/fences/FenceTiles.tscn" id="4_v4ae3"]
@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://hcgi0vnjas58" path="res://src/player/hairo/TDHairo.tscn" id="6_isnyu"]
 
 [node name="SacrificeVillager" type="Node2D"]
-script = ExtResource("1_qwmfr")
+script = ExtResource("1_a7gpj")
+directive = "Sacrifice A Villager!"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.67922, 0.399272, 0.399974, 1)

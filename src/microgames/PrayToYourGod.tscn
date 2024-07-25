@@ -1,13 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://d80fhop3dves"]
 
 [ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="1_0pjet"]
-[ext_resource type="Script" path="res://src/microgames/MicroGame.gd" id="1_48f2s"]
+[ext_resource type="Script" path="res://src/microgames/PrayToYourGod.gd" id="1_c7o3p"]
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="2_ocy6g"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/entities/candles/Candle.tscn" id="6_h6ef8"]
 [ext_resource type="PackedScene" uid="uid://hcgi0vnjas58" path="res://src/player/hairo/TDHairo.tscn" id="8_gwelh"]
 
 [node name="PrayToYourGod" type="Node2D"]
-script = ExtResource("1_48f2s")
+script = ExtResource("1_c7o3p")
+directive = "Pray To Your God!"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.67922, 0.399272, 0.399974, 1)

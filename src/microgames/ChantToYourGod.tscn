@@ -1,13 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://cm5qaab022xay"]
 
+[ext_resource type="Script" path="res://src/microgames/ChantToYourGod.gd" id="1_51bll"]
 [ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="1_rdcl2"]
-[ext_resource type="Script" path="res://src/microgames/MicroGame.gd" id="1_rtp34"]
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="2_tp07v"]
 [ext_resource type="PackedScene" uid="uid://bax62g5wrhfl7" path="res://src/entities/chant_station/ChantStation.tscn" id="7_at8kt"]
 [ext_resource type="PackedScene" uid="uid://hcgi0vnjas58" path="res://src/player/hairo/TDHairo.tscn" id="8_dlob3"]
 
 [node name="ChantToYourGod" type="Node2D"]
-script = ExtResource("1_rtp34")
+script = ExtResource("1_51bll")
+directive = "Chant To Your God!"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.67922, 0.399272, 0.399974, 1)

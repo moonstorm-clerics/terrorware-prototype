@@ -4,6 +4,7 @@ class_name Stage
 ## vars ################################################
 
 @onready var stage_ui = $%StageUI
+@onready var directive_label = $%DirectiveLabel
 @onready var game_container = $%MicroGameContainer
 
 @export var micro_games: Array[PackedScene] = []
@@ -25,6 +26,7 @@ var lost_count = 0
 func _ready():
 	Log.pr("stage ready.....")
 	game_container.set_process_mode(PROCESS_MODE_DISABLED)
+	directive_label.set_visible(false)
 
 	start_next_game()
 
@@ -49,13 +51,17 @@ func start_microgame(game_node):
 	game_node.game_won.connect(on_game_won)
 	game_node.game_lost.connect(on_game_lost)
 
+	directive_label.text = "[center]%s[/center]" % game_node.directive
+
 	await Anim.fade_out(stage_ui, transition_t)
 
-	# TODO pause/transition in game container?
 	game_container.add_child(game_node)
 	game_container.set_process_mode(PROCESS_MODE_INHERIT)
+	directive_label.set_visible(true)
 	Anim.fade_in(game_node, transition_t)
 
+	get_tree().create_timer(2.0).timeout.connect(func():
+		directive_label.set_visible(false))
 	get_tree().create_timer(game_t).timeout.connect(exit_microgame)
 
 func exit_microgame():
@@ -87,11 +93,11 @@ func exit_microgame():
 ## game won/lost ################################################
 
 func on_game_won():
-	Log.pr("game won! exiting!")
+	Log.pr("marking game won!")
 	outcome = Outcome.WON
-	exit_microgame()
+	# exit_microgame()
 
 func on_game_lost():
-	Log.pr("game lost! exiting!")
+	Log.pr("marking game lost!")
 	outcome = Outcome.LOST
-	exit_microgame()
+	# exit_microgame()
