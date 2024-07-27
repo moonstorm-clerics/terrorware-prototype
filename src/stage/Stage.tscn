@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://r4m46vr1ic2e"]
+[gd_scene load_steps=13 format=3 uid="uid://r4m46vr1ic2e"]
 
 [ext_resource type="Script" path="res://src/stage/Stage.gd" id="1_7hh2t"]
 [ext_resource type="PackedScene" uid="uid://cm5qaab022xay" path="res://src/microgames/ChantToYourGod.tscn" id="2_8i8hl"]
@@ -8,6 +8,31 @@
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="6_uc5px"]
 [ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="7_xt0uo"]
 [ext_resource type="PackedScene" uid="uid://bhxr5bwh2xafe" path="res://src/npcs/villagers/TDVillager.tscn" id="8_pfypn"]
+[ext_resource type="Shader" path="res://src/effects/crtv.gdshader" id="9_onp0o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_utt7d"]
+shader = ExtResource("9_onp0o")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_som5x"]
 
@@ -16,6 +41,16 @@
 [node name="Stage" type="Node"]
 script = ExtResource("1_7hh2t")
 micro_games = Array[PackedScene]([ExtResource("2_8i8hl"), ExtResource("3_jjqn3"), ExtResource("4_t6f5i"), ExtResource("5_1ade2")])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CRTVShader" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_utt7d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 3
