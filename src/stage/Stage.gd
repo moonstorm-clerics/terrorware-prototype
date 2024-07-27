@@ -17,10 +17,9 @@ var game_t = 4.0
 var transition_t = 0.8
 
 enum State {STAGE, MICROGAME}
-enum Outcome {WON, LOST}
 
 var state = State.STAGE
-var outcome
+var microgame: MicroGame
 
 var won_count = 0
 var lost_count = 0
@@ -47,18 +46,13 @@ func start_next_game():
 	var game_node = game_scene.instantiate()
 	start_microgame(game_node)
 
+
 func start_microgame(game_node):
-	Log.pr("Entering microgame")
+	Log.pr("Starting microgame")
 	state = State.MICROGAME
-	if game_node.default_outcome != null:
-		outcome = game_node.default_outcome
-	else:
-		outcome = Outcome.WON
 
-	game_node.game_won.connect(on_game_won)
-	game_node.game_lost.connect(on_game_lost)
-
-	directive_label.text = "[center]%s[/center]" % game_node.directive
+	microgame = setup_microgame(game_node)
+	Log.pr("Entering microgame", microgame)
 
 	Anim.fade_out(stage_ui, transition_t)
 	await Anim.fade_out(village, transition_t)
@@ -76,20 +70,20 @@ func exit_microgame():
 	if state == State.STAGE:
 		Log.warn("Already exited, nothing to do")
 		return
-	Log.pr("Exiting microgame")
+	Log.pr("Exiting microgame", microgame)
 
-	# TODO time up sound
+	# TODO time up! sound
 
 	Engine.set_time_scale(0.5)
 
-	match outcome:
-		Outcome.WON:
+	match microgame.outcome:
+		MicroGame.Outcome.WON:
 			won_count += 1
-		Outcome.LOST:
+		MicroGame.Outcome.LOST:
 			lost_count += 1
-		_: Log.warn("Unhandled game outcome: ", outcome)
+		_: Log.warn("Unhandled game outcome: ", microgame.outcome)
 
-	outcome = null
+	microgame = null
 	state = State.STAGE
 
 	await Anim.fade_out(game_container.get_children()[0], transition_t)
@@ -105,14 +99,24 @@ func exit_microgame():
 
 	start_next_game()
 
+## microgame setup ################################################
+
+func setup_microgame(node):
+	var mg = MicroGame.get_microgame(node)
+
+	mg.game_won.connect(on_game_won)
+	mg.game_lost.connect(on_game_lost)
+
+	directive_label.text = "[center]%s[/center]" % mg.directive
+
+	return mg
+
 ## game won/lost ################################################
 
 func on_game_won():
 	Log.pr("marking game won!")
-	outcome = Outcome.WON
-	# TODO you win! sound and visual notif
+	# TODO you win! sound and visual
 
 func on_game_lost():
 	Log.pr("marking game lost!")
-	outcome = Outcome.LOST
-	# TODO you lose! sound and visual notif
+	# TODO you lose! sound and visual

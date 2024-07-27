@@ -1,15 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://ng1abxpgf6hd"]
+[gd_scene load_steps=8 format=3 uid="uid://ng1abxpgf6hd"]
 
 [ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="1_4r18s"]
 [ext_resource type="Script" path="res://src/microgames/SacrificeYourself.gd" id="1_d67y2"]
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="2_w8bsu"]
 [ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/core/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="3_jauc7"]
 [ext_resource type="PackedScene" uid="uid://bhxr5bwh2xafe" path="res://src/npcs/villagers/TDVillager.tscn" id="5_2ump5"]
+[ext_resource type="Script" path="res://src/microgames/MicroGame.gd" id="7_bi650"]
 [ext_resource type="PackedScene" uid="uid://hcgi0vnjas58" path="res://src/player/hairo/TDHairo.tscn" id="8_kj2bl"]
 
 [node name="SacrificeYourself" type="Node2D"]
 script = ExtResource("1_d67y2")
-directive = "Sacrifice Yourself!"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.67922, 0.399272, 0.399974, 1)
@@ -36,3 +36,7 @@ position = Vector2(352, 260)
 
 [node name="TDHairo" parent="." instance=ExtResource("8_kj2bl")]
 position = Vector2(243, 147)
+
+[node name="MicroGame" type="Node" parent="."]
+script = ExtResource("7_bi650")
+directive = "Sacrifice Yourself!"

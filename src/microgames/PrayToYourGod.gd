@@ -1,10 +1,11 @@
-extends MicroGame
+extends Node2D
 
 @onready var player = $TDHairo
+@onready var microgame = $MicroGame
 
 func player_transit(new_state_name):
 	match new_state_name:
-		"Pray": game_won.emit()
+		"Pray": microgame.game_won.emit()
 		"Chant": pass
 		_: pass
 
