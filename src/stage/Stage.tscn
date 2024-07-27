@@ -1,10 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://r4m46vr1ic2e"]
+[gd_scene load_steps=11 format=3 uid="uid://r4m46vr1ic2e"]
 
 [ext_resource type="Script" path="res://src/stage/Stage.gd" id="1_7hh2t"]
-[ext_resource type="PackedScene" uid="uid://cm5qaab022xay" path="res://src/microgames/ChantToYourGod.tscn" id="2_8i8hl"]
-[ext_resource type="PackedScene" uid="uid://d80fhop3dves" path="res://src/microgames/PrayToYourGod.tscn" id="3_jjqn3"]
-[ext_resource type="PackedScene" uid="uid://xeg1niv7uyo8" path="res://src/microgames/SacrificeVillager.tscn" id="4_t6f5i"]
-[ext_resource type="PackedScene" uid="uid://ng1abxpgf6hd" path="res://src/microgames/SacrificeYourself.tscn" id="5_1ade2"]
+[ext_resource type="PackedScene" uid="uid://bmvkn6oj6jxm0" path="res://src/microgames/ScaryButtons.tscn" id="2_3f6hm"]
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="6_uc5px"]
 [ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="7_xt0uo"]
 [ext_resource type="PackedScene" uid="uid://bhxr5bwh2xafe" path="res://src/npcs/villagers/TDVillager.tscn" id="8_pfypn"]
@@ -41,7 +38,7 @@ shader_parameter/vignette_opacity = 0.5
 
 [node name="Stage" type="Node"]
 script = ExtResource("1_7hh2t")
-micro_games = Array[PackedScene]([ExtResource("2_8i8hl"), ExtResource("3_jjqn3"), ExtResource("4_t6f5i"), ExtResource("5_1ade2")])
+micro_games = Array[PackedScene]([ExtResource("2_3f6hm")])
 
 [node name="Village" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -129,6 +126,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_som5x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MicroGameUI"]
@@ -150,6 +148,7 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"HeroTextLabel"
 bbcode_enabled = true
 text = "[center]Do the thing![/center]"
@@ -164,28 +163,6 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MicroGameUI/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 180)
-layout_mode = 2
-
-[node name="MarginContainer4" type="MarginContainer" parent="UI/MicroGameUI/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="OutcomeLabel" type="RichTextLabel" parent="UI/MicroGameUI/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-theme_type_variation = &"HeroTextLabel"
-bbcode_enabled = true
-text = "[center][color=green]SURVIVED![/color][/center]"
-fit_content = true
-scroll_active = false
-
-[node name="MarginContainer3" type="MarginContainer" parent="UI/MicroGameUI/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="MarginContainer" type="MarginContainer" parent="UI/MicroGameUI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -197,6 +174,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ib5jm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/StageUI"]
@@ -227,6 +205,32 @@ scroll_active = false
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="MarginContainer3" type="MarginContainer" parent="UI/StageUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/StageUI/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 180)
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="UI/StageUI/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OutcomeLabel" type="RichTextLabel" parent="UI/StageUI/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_type_variation = &"HeroTextLabel"
+bbcode_enabled = true
+text = "[center][color=green]SURVIVED![/color][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer3" type="MarginContainer" parent="UI/StageUI/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="MarginContainer5" type="MarginContainer" parent="UI/StageUI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -252,7 +256,7 @@ scroll_active = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer3" type="MarginContainer" parent="UI/StageUI/VBoxContainer"]
+[node name="MarginContainer6" type="MarginContainer" parent="UI/StageUI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 

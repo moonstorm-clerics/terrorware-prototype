@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmvkn6oj6jxm0"]
+
+[ext_resource type="Script" path="res://src/microgames/ScaryButtons.gd" id="1_aee2p"]
+[ext_resource type="Script" path="res://src/microgames/MicroGame.gd" id="1_egxkw"]
+
+[node name="ScaryButtons" type="Node"]
+script = ExtResource("1_aee2p")
+
+[node name="MicroGame" type="Node" parent="."]
+script = ExtResource("1_egxkw")
+directive = "Click the Scary Button!"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.599422, 0.171431, 0.247636, 1)
+
+[node name="ScaryButton" type="Button" parent="."]
+offset_left = 848.0
+offset_top = 485.0
+offset_right = 897.0
+offset_bottom = 509.0
+scale = Vector2(4, 4)
+text = "SCARY!!"
+
+[node name="OtherButton" type="Button" parent="."]
+offset_left = 289.0
+offset_top = 419.0
+offset_right = 403.0
+offset_bottom = 443.0
+scale = Vector2(4, 4)
+text = "Everything is fine"
+
+[node name="OtherButton2" type="Button" parent="."]
+offset_left = 80.0
+offset_top = 119.0
+offset_right = 194.0
+offset_bottom = 143.0
+scale = Vector2(4, 4)
+text = "Click me!!"
+
+[node name="AnotherButton" type="Button" parent="."]
+offset_left = 587.0
+offset_top = 85.0
+offset_right = 652.0
+offset_bottom = 109.0
+scale = Vector2(4, 4)
+text = "You rock!"
+
+[node name="AnotherButton2" type="Button" parent="."]
+offset_left = 182.0
+offset_top = 288.0
+offset_right = 377.0
+offset_bottom = 312.0
+scale = Vector2(4, 4)
+text = "Click here for CA$H CAS# CASH!"

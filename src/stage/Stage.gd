@@ -64,6 +64,8 @@ func start_microgame(game_node):
 	# pause and fade out stage/village
 	Anim.fade_out(stage_ui, transition_t)
 	await Anim.fade_out(village, transition_t)
+	stage_ui.set_visible(false)
+	village.set_visible(false)
 	village.set_process_mode(PROCESS_MODE_DISABLED)
 	player.camera.set_enabled(false)
 
@@ -112,6 +114,8 @@ func exit_microgame():
 	state = State.STAGE
 	player.camera.set_enabled(true)
 	village.set_process_mode(PROCESS_MODE_INHERIT)
+	stage_ui.set_visible(true)
+	village.set_visible(true)
 	Anim.fade_in(village, transition_t)
 	await Anim.fade_in(stage_ui, transition_t)
 
