@@ -139,7 +139,7 @@ func _on_transit(label):
 var actions = [
 	Action.mk({
 		label="Grab",
-		fn=grabbed_by_player,
+		fn=grabbed_by_entity,
 		show_on_source=true, show_on_actor=false,
 		source_can_execute=func(): return can_be_grabbed_thrown and \
 			not machine.state.name in ["Thrown"],
@@ -299,18 +299,21 @@ func stamp(opts={}):
 
 ## follow #########################################################
 
-func follow_player(player):
+func follow_entity(ent):
 	# Sounds.play(Sounds.S.coin)
-	U._connect(player.died, on_player_died)
-	following = player
+	if ent.has_signal("died"):
+		U._connect(ent.died, func(): following = null)
+	following = ent
 	machine.transit("Follow")
 
 ## grabbed/thrown #########################################################
 
-func grabbed_by_player(player):
-	U._connect(player.died, on_player_died)
-	player.grab(self)
-	grabbed_by = player
+func grabbed_by_entity(ent):
+	if ent.has_signal("died"):
+		U._connect(ent.died, func(): grabbed_by = null)
+	if ent.has_method("grab"):
+		ent.grab(self)
+	grabbed_by = ent
 	machine.transit("Grabbed")
 
 func thrown_by_player(player):
@@ -320,10 +323,6 @@ func thrown_by_player(player):
 			direction=opts.get("direction", Vector2.LEFT),
 			throw_speed=opts.get("throw_speed")
 			})
-
-func on_player_died(_player):
-	following = null
-	grabbed_by = null
 
 ## point_arrow ###########################################################
 

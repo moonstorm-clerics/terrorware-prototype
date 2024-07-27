@@ -5,7 +5,8 @@ extends State
 
 
 func enter(_opts = {}):
-	pass
+	if actor.following == null:
+		Log.warn("NPC entered follow with no '.following' assigned!")
 	# actor.anim.play("follow")
 
 func exit(_opts = {}):

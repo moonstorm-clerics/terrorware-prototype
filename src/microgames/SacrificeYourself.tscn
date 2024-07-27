@@ -30,9 +30,19 @@ layer_0/tile_data = PackedInt32Array(1114129, 393216, 3, 1048593, 196608, 2, 983
 
 [node name="TDVillager" parent="." instance=ExtResource("5_2ump5")]
 position = Vector2(380, 257)
+display_name = null
+initial_health = null
+run_speed = null
+wander_speed = null
+jump_speed = null
 
 [node name="TDVillager2" parent="." instance=ExtResource("5_2ump5")]
 position = Vector2(352, 260)
+display_name = null
+initial_health = null
+run_speed = null
+wander_speed = null
+jump_speed = null
 
 [node name="TDHairo" parent="." instance=ExtResource("8_kj2bl")]
 position = Vector2(243, 147)

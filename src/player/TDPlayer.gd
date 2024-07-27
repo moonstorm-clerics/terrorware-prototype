@@ -63,6 +63,8 @@ var pit_detector
 var heart_particles
 var skull_particles
 
+var camera
+
 # var quick_select_scene = preload("res://src/components/quick_select/QuickSelect.tscn")
 # var quick_select_menu
 
@@ -87,6 +89,7 @@ func _ready():
 		seed_icon="Item/SeedIcon",
 		seed_type_icon="Item/SeedIcon/SeedTypeIcon",
 		tool_icon="Item/ToolIcon",
+		camera="Camera2D",
 		})
 
 	if hurt_box:
