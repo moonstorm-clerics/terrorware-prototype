@@ -9,6 +9,7 @@ script = ExtResource("1_aee2p")
 [node name="MicroGame" type="Node" parent="."]
 script = ExtResource("1_egxkw")
 directive = "Click the Scary Button!"
+early_exit = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

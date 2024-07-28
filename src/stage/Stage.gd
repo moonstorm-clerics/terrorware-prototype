@@ -15,7 +15,8 @@ class_name Stage
 
 @export var micro_games: Array[PackedScene] = []
 
-var game_t = 4.0
+var microgame_t = 4.0
+var between_games_t = 4.0
 var transition_t = 0.8
 
 enum State {STAGE, MICROGAME}
@@ -34,7 +35,6 @@ var villagers = []
 
 func _ready():
 	Log.pr("stage ready.....")
-	directive_label.set_visible(false)
 	outcome_label.set_visible(false)
 
 	setup_follows()
@@ -63,24 +63,26 @@ func start_microgame(game_node):
 
 	# pause and fade out stage/village
 	Anim.fade_out(stage_ui, transition_t)
-	await Anim.fade_out(village, transition_t)
-	stage_ui.set_visible(false)
-	village.set_visible(false)
-	village.set_process_mode(PROCESS_MODE_DISABLED)
-	player.camera.set_enabled(false)
+	Anim.fade_out(village, transition_t).connect(func():
+		stage_ui.set_visible(false)
+		village.set_visible(false)
+		village.set_process_mode(PROCESS_MODE_DISABLED)
+		player.camera.set_enabled(false))
+
+	# show directive and game-splash for 2s
+	microgame_ui.set_visible(true)
+	await Anim.fade_in(directive_label, 1.0)
+	await get_tree().create_timer(2.0).timeout
+	await Anim.fade_out(directive_label, 0.4)
+	microgame_ui.set_visible(false)
 
 	# add and present game node
-	directive_label.set_visible(true)
 	game_container.add_child(game_node)
 	game_container.set_process_mode(PROCESS_MODE_INHERIT)
 	Anim.fade_in(game_node, transition_t)
 
-	# clear directive line after 2s
-	get_tree().create_timer(2.0).timeout.connect(func():
-		directive_label.set_visible(false))
-
-	# end game after `game_t` seconds
-	get_tree().create_timer(game_t).timeout.connect(exit_microgame)
+	# end game after `microgame_t` seconds
+	get_tree().create_timer(microgame_t).timeout.connect(exit_microgame)
 
 func exit_microgame():
 	if state == State.STAGE:
@@ -91,13 +93,7 @@ func exit_microgame():
 	# TODO time up! sound
 
 	var outcome = microgame.outcome
-	if outcome == microgame.default_outcome:
-		match outcome:
-			MicroGame.Outcome.WON:
-				on_game_won()
-			MicroGame.Outcome.LOST:
-				on_game_lost()
-
+	update_outcome_label(outcome)
 
 	# start slowmo
 	Engine.set_time_scale(0.5)
@@ -105,7 +101,6 @@ func exit_microgame():
 	# clean up game
 	await Anim.fade_out(game_container.get_children()[0], transition_t)
 	U.remove_children(game_container)
-	directive_label.set_visible(false)
 
 	# end slowmo
 	Engine.set_time_scale(1.0)
@@ -135,7 +130,7 @@ func exit_microgame():
 	lives_label.text = "[center]Lives: %s[/center]" % (lives - lost_count)
 
 	# wait a bit before starting again
-	await get_tree().create_timer(game_t).timeout
+	await get_tree().create_timer(between_games_t).timeout
 
 	outcome_label.set_visible(false)
 	start_next_game()
@@ -145,8 +140,9 @@ func exit_microgame():
 func setup_microgame(node):
 	var mg = MicroGame.get_microgame(node)
 
-	mg.game_won.connect(on_game_won)
-	mg.game_lost.connect(on_game_lost)
+	# these need to be invoked AFTER outcome is uped in microgame
+	mg.game_won.connect(on_game_won, CONNECT_DEFERRED)
+	mg.game_lost.connect(on_game_lost, CONNECT_DEFERRED)
 
 	directive_label.text = "[center]%s[/center]" % mg.directive
 
@@ -156,13 +152,26 @@ func setup_microgame(node):
 
 func on_game_won():
 	# you win! sound and visual
-	outcome_label.set_visible(true)
-	outcome_label.text = "[center][color=green]%s[/color][/center]" % "SURVIVED"
+	if microgame.early_exit:
+		exit_microgame()
 
 func on_game_lost():
 	# you lose! sound and visual
+	if microgame.early_exit:
+		exit_microgame()
+
+func update_outcome_label(outcome):
+	var color
+	var text
+	match outcome:
+		MicroGame.Outcome.WON:
+			color = "green"
+			text = "SURVIVED"
+		MicroGame.Outcome.LOST:
+			color = "red"
+			text = "FAIL"
 	outcome_label.set_visible(true)
-	outcome_label.text = "[center][color=red]%s[/color][/center]" % "FAIL"
+	outcome_label.text = "[center][color=%s]%s[/color][/center]" % [color, text]
 
 ## villager follows ###########################################
 
