@@ -3,10 +3,15 @@ extends NaviButtonList
 
 var button_defs = [
 	{
-		label="Main Menu",
-		fn=Navi.nav_to_main_menu,
+		label="Start game",
+		fn=Navi.nav_to.bind("res://src/stage/Stage.tscn"),
+	},
+	{
+		label="Quit",
+		fn=func(): get_tree().quit(),
 	},
 ]
+
 
 func _ready():
 	for def in button_defs:

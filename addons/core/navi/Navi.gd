@@ -18,6 +18,7 @@ func _ready():
 	if first.scene_file_path == main_scene_path:
 		first_scene = first
 
+	set_main_menu("res://src/menus/MainMenu.tscn")
 	set_pause_menu("res://addons/core/navi/NaviPauseMenu.tscn")
 	set_win_menu("res://addons/core/navi/NaviWinMenu.tscn")
 	set_death_menu("res://addons/core/navi/NaviDeathMenu.tscn")

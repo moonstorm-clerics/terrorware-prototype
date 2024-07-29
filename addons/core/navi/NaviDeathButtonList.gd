@@ -3,9 +3,8 @@ extends NaviButtonList
 
 var button_defs = [
 	{
-		label="Dino Menu",
+		label="Main Menu",
 		fn=Navi.nav_to_main_menu,
-		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
 	},
 ]
 
