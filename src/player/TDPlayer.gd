@@ -277,7 +277,7 @@ func die(_opts={}):
 
 ## damage ###########################################################
 
-func take_hit(opts):
+func take_hit(opts={}):
 	take_damage(opts)
 	var hit_type = opts.get("type")
 	var body = opts.get("body")

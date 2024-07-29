@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://r4m46vr1ic2e"]
+[gd_scene load_steps=15 format=3 uid="uid://r4m46vr1ic2e"]
 
 [ext_resource type="Script" path="res://src/stage/Stage.gd" id="1_7hh2t"]
 [ext_resource type="PackedScene" uid="uid://bmvkn6oj6jxm0" path="res://src/microgames/ScaryButtons.tscn" id="2_3f6hm"]
+[ext_resource type="PackedScene" uid="uid://de7kalcp5k3vv" path="res://src/microgames/StayInTheShadows.tscn" id="2_6hwmf"]
 [ext_resource type="PackedScene" uid="uid://cm5qaab022xay" path="res://src/microgames/ChantToYourGod.tscn" id="2_8i8hl"]
 [ext_resource type="PackedScene" uid="uid://d80fhop3dves" path="res://src/microgames/PrayToYourGod.tscn" id="3_jjqn3"]
 [ext_resource type="PackedScene" uid="uid://xeg1niv7uyo8" path="res://src/microgames/SacrificeVillager.tscn" id="4_t6f5i"]
@@ -45,7 +46,7 @@ corner_radius_bottom_left = 8
 
 [node name="Stage" type="Node"]
 script = ExtResource("1_7hh2t")
-micro_games = Array[PackedScene]([ExtResource("2_3f6hm"), ExtResource("2_8i8hl"), ExtResource("3_jjqn3"), ExtResource("4_t6f5i"), ExtResource("5_1ade2")])
+micro_games = Array[PackedScene]([ExtResource("2_6hwmf"), ExtResource("2_3f6hm"), ExtResource("2_8i8hl"), ExtResource("3_jjqn3"), ExtResource("4_t6f5i"), ExtResource("5_1ade2")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
