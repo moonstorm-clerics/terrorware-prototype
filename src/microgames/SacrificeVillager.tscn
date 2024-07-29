@@ -33,25 +33,13 @@ layer_0/tile_data = PackedInt32Array(720903, 196608, 3, 655367, 196608, 2, 58983
 layer_0/tile_data = PackedInt32Array(1572879, 131072, 5, 1572878, 131072, 5, 1572877, 131072, 5, 1572876, 131072, 5, 1572875, 131072, 5, 1572874, 131072, 5, 1572873, 131072, 5, 1572872, 131072, 5, 1572871, 131072, 5, 1572870, 65536, 5, 1507344, 262144, 2, 1572880, 196608, 5, 983056, 262144, 2, 1048592, 262144, 3, 1114128, 262144, 4, 983046, 65536, 5, 983047, 131072, 5, 983048, 131072, 5, 983049, 131072, 5, 983050, 131072, 5, 983051, 131072, 5, 983052, 131072, 5, 983053, 131072, 5, 983054, 131072, 5, 983055, 131072, 5, 1572906, 131072, 5, 1572907, 131072, 5, 1572908, 131072, 5, 1572909, 131072, 5, 1572910, 131072, 5, 1572911, 131072, 5, 1572912, 131072, 5, 1572913, 131072, 5, 1572914, 131072, 5, 1572915, 131072, 5, 1572916, 131072, 5, 1572917, 131072, 5, 1572918, 131072, 5, 1572919, 196608, 5, 1441833, 262144, 2, 1507369, 262144, 3, 1572905, 65536, 5, 983081, 65536, 5, 983082, 131072, 5, 983083, 131072, 5, 983084, 131072, 5, 983085, 131072, 5, 983086, 131072, 5, 983087, 131072, 5, 983088, 131072, 5, 983089, 131072, 5, 983090, 131072, 5, 983091, 131072, 5, 983092, 131072, 5, 983093, 131072, 5, 983094, 131072, 5, 983095, 196608, 5, 1048617, 262144, 4)
 
 [node name="TDVillager" parent="." instance=ExtResource("5_xa3s0")]
-position = Vector2(380, 257)
-
-[node name="TDVillager2" parent="." instance=ExtResource("5_xa3s0")]
-position = Vector2(139, 232)
-
-[node name="TDVillager3" parent="." instance=ExtResource("5_xa3s0")]
-position = Vector2(290, 254)
-
-[node name="TDVillager4" parent="." instance=ExtResource("5_xa3s0")]
-position = Vector2(320, 227)
-
-[node name="TDVillager5" parent="." instance=ExtResource("5_xa3s0")]
-position = Vector2(339, 233)
+position = Vector2(238, 236)
 
 [node name="TDVillager6" parent="." instance=ExtResource("5_xa3s0")]
-position = Vector2(183, 225)
+position = Vector2(315, 89)
 
 [node name="TDVillager7" parent="." instance=ExtResource("5_xa3s0")]
-position = Vector2(110, 225)
+position = Vector2(153, 93)
 
 [node name="TDHairo" parent="." instance=ExtResource("6_isnyu")]
 position = Vector2(243, 147)
