@@ -1,0 +1,176 @@
+[gd_scene load_steps=16 format=3 uid="uid://5voq2r12gcec"]
+
+[ext_resource type="Script" path="res://src/microgames/MicroGame.gd" id="1_7piku"]
+[ext_resource type="Script" path="res://src/microgames/MakeDinner.gd" id="1_a4ffp"]
+[ext_resource type="Script" path="res://src/microgames/DraggableRigidBody.gd" id="2_ssrxt"]
+[ext_resource type="Texture2D" uid="uid://djxyrl3u8yymn" path="res://src/microgames/SPIKE_Cooking_pot.png" id="4_ut1uh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6duse"]
+size = Vector2(262, 168)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42fpl"]
+atlas = ExtResource("4_ut1uh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yks3"]
+atlas = ExtResource("4_ut1uh")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqehp"]
+atlas = ExtResource("4_ut1uh")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkbna"]
+atlas = ExtResource("4_ut1uh")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d687k"]
+atlas = ExtResource("4_ut1uh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hpdw"]
+atlas = ExtResource("4_ut1uh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h7ok4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42fpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yks3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqehp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkbna")
+}],
+"loop": true,
+"name": &"cooking",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d687k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hpdw")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgvfe"]
+size = Vector2(57, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_woo0o"]
+size = Vector2(89, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwdty"]
+size = Vector2(80, 24)
+
+[node name="MakeDinner" type="Node2D"]
+script = ExtResource("1_a4ffp")
+
+[node name="MicroGame" type="Node" parent="."]
+script = ExtResource("1_7piku")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 916.0
+offset_bottom = 560.0
+mouse_filter = 2
+color = Color(0.232273, 0.461718, 0.511753, 1)
+
+[node name="Pot" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(637, 385)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pot"]
+shape = SubResource("RectangleShape2D_6duse")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pot"]
+texture_filter = 1
+position = Vector2(1, -46)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_h7ok4")
+animation = &"cooking"
+autoplay = "cooking"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "/home/russ/russmatney/dino/src/dino/entities/cookingPot/SPIKE_Cooking_pot.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "824ed6824df803bd86862ab683f06e33"
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." groups=["draggable", "good_ingredients"]]
+position = Vector2(122, 141)
+input_pickable = true
+gravity_scale = 0.0
+freeze_mode = 1
+continuous_cd = 1
+script = ExtResource("2_ssrxt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(2.5, -1.5)
+shape = SubResource("RectangleShape2D_xgvfe")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RigidBody2D"]
+offset_left = -39.0
+offset_top = -15.0
+offset_right = 43.0
+offset_bottom = 17.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Meat[/center]"
+fit_content = true
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="." groups=["draggable", "good_ingredients"]]
+position = Vector2(226, 95)
+input_pickable = true
+gravity_scale = 0.0
+freeze_mode = 1
+script = ExtResource("2_ssrxt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+position = Vector2(7.5, 1.5)
+shape = SubResource("RectangleShape2D_woo0o")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RigidBody2D2"]
+offset_left = -39.0
+offset_top = -15.0
+offset_right = 52.0
+offset_bottom = 17.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Veggies[/center]"
+fit_content = true
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="." groups=["bad_ingredients", "draggable", "poison"]]
+position = Vector2(257, 167)
+input_pickable = true
+gravity_scale = 0.0
+freeze_mode = 1
+continuous_cd = 1
+script = ExtResource("2_ssrxt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D3"]
+position = Vector2(4, -2)
+shape = SubResource("RectangleShape2D_mwdty")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RigidBody2D3"]
+offset_left = -39.0
+offset_top = -16.0
+offset_right = 46.0
+offset_bottom = 16.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Poison[/center]"
+fit_content = true
+scroll_active = false
