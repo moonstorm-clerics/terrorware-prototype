@@ -37,7 +37,11 @@ shader_parameter/vignette_opacity = 0.5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ib5jm"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_som5x"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqxdu"]
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Stage" type="Node"]
 script = ExtResource("1_7hh2t")
@@ -148,35 +152,28 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MicroGameUI" type="PanelContainer" parent="CanvasLayer"]
+[node name="MicroGameProgressBar" type="ProgressBar" parent="CanvasLayer"]
 unique_name_in_owner = true
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_som5x")
+offset_right = 1152.0
+offset_bottom = 20.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_iqxdu")
+fill_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MicroGameUI"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer"]
+offset_top = 37.0
+offset_right = 1152.0
+offset_bottom = 101.0
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/HBoxContainer4"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/MicroGameUI/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MicroGameUI/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 180)
-layout_mode = 2
-
-[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/MicroGameUI/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="DirectiveLabel" type="RichTextLabel" parent="CanvasLayer/MicroGameUI/VBoxContainer/HBoxContainer"]
+[node name="DirectiveLabel" type="RichTextLabel" parent="CanvasLayer/HBoxContainer4"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
 mouse_filter = 2
 theme_type_variation = &"HeroTextLabel"
 bbcode_enabled = true
@@ -184,17 +181,9 @@ text = "[center]Do the thing![/center]"
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/MicroGameUI/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/HBoxContainer4"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer6" type="MarginContainer" parent="CanvasLayer/MicroGameUI/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MicroGameUI/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
 
 [node name="Village" type="Node2D" parent="."]
 unique_name_in_owner = true

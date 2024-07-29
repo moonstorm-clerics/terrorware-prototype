@@ -8,7 +8,7 @@ class_name Stage
 @onready var challenges_label = $%ChallengesLabel
 @onready var lives_label = $%LivesLabel
 
-@onready var microgame_ui = $%MicroGameUI
+@onready var microgame_progress_bar = $%MicroGameProgressBar
 @onready var stage_ui = $%StageUI
 @onready var village = $%Village
 @onready var game_container = $%MicroGameContainer
@@ -36,7 +36,7 @@ var villagers = []
 ## ready ################################################
 
 func _ready():
-	randomize() # randomize seed
+	# randomize() # randomize seed
 	micro_games.shuffle()
 
 	Log.pr("stage ready.....")
@@ -79,31 +79,54 @@ func start_microgame(game_node):
 	state = State.MICROGAME
 
 	microgame = setup_microgame(game_node)
+	await Anim.fade_in(directive_label, 1.0)
 	Log.pr("Entering microgame", microgame)
+
+	await get_tree().create_timer(0.6).timeout
 
 	# pause and fade out stage/village
 	Anim.fade_out(stage_ui, transition_t)
-	Anim.fade_out(village, transition_t).connect(func():
-		stage_ui.set_visible(false)
-		village.set_visible(false)
-		village.set_process_mode(PROCESS_MODE_DISABLED)
-		camera.set_enabled(false)
-		)
+	await Anim.fade_out(village, transition_t)
 
-	# show directive and game-splash for 2s
-	microgame_ui.set_visible(true)
-	await Anim.fade_in(directive_label, 1.0)
+	stage_ui.set_visible(false)
+	village.set_visible(false)
+	village.set_process_mode(PROCESS_MODE_DISABLED)
+	camera.set_enabled(false)
+
 	await get_tree().create_timer(0.6).timeout
-	await Anim.fade_out(directive_label, 0.4)
-	microgame_ui.set_visible(false)
 
 	# add and present game node
 	game_container.add_child(game_node)
 	game_container.set_process_mode(PROCESS_MODE_INHERIT)
-	Anim.fade_in(game_node, transition_t)
+	await Anim.fade_in(game_node, transition_t)
+
+	get_tree().create_timer(2.0).timeout.connect(func():
+		Anim.fade_out(directive_label, 0.4))
+
+	match microgame.default_outcome:
+		MicroGame.Outcome.LOST:
+			microgame_progress_bar.modulate = Color.CRIMSON
+		MicroGame.Outcome.WON:
+			microgame_progress_bar.modulate = Color.GREEN
 
 	# end game after `microgame_t` seconds
 	get_tree().create_timer(microgame_t).timeout.connect(exit_microgame)
+	reset_progress_timer()
+	do_timer_update()
+
+func reset_progress_timer():
+	microgame_progress_bar.value = 0
+
+func do_timer_update():
+	var step = microgame_t / 10.0
+	microgame_progress_bar.set_max(microgame_t)
+	microgame_progress_bar.value += step
+	await get_tree().create_timer(step).timeout
+
+	if microgame_progress_bar.value < microgame_progress_bar.max_value:
+		do_timer_update()
+	else:
+		reset_progress_timer()
 
 func exit_microgame():
 	if state == State.STAGE:
@@ -183,11 +206,13 @@ func on_game_won():
 	# you win! sound and visual
 	if microgame.early_exit:
 		exit_microgame()
+	microgame_progress_bar.modulate = Color.GREEN
 
 func on_game_lost():
 	# you lose! sound and visual
 	if microgame.early_exit:
 		exit_microgame()
+	microgame_progress_bar.modulate = Color.CRIMSON
 
 func update_outcome_label(outcome):
 	var color
