@@ -18,6 +18,6 @@ func _process(_delta):
 		if d.is_colliding():
 			player_lost = true
 			Log.pr("PLAYER IN THE LIGHT!")
-			player.take_hit({})
+			player.take_hit()
 
 			mg.game_lost.emit()

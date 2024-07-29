@@ -27,7 +27,10 @@ var outcome
 ## ready ###########################################
 
 func _ready():
-	outcome = U._or(default_outcome, Outcome.LOST)
+	if default_outcome != null:
+		outcome = default_outcome
+	else:
+		outcome = Outcome.LOST
 	game_won.connect(on_game_won)
 	game_lost.connect(on_game_lost)
 
