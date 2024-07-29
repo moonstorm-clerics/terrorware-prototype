@@ -431,7 +431,8 @@ func stamp(opts={}):
 		new_anim.add_child(ax_hint)
 
 	new_anim.global_position = global_position + anim.position
-	U.add_child_to_level(self, new_anim)
+	var p = get_parent()
+	p.add_child(new_anim)
 
 	var ttl = opts.get("ttl", 0.5)
 	if ttl > 0:
