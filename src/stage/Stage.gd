@@ -14,6 +14,7 @@ class_name Stage
 @onready var game_container = $%MicroGameContainer
 
 @export var micro_games: Array[PackedScene] = []
+var game_idx = 0
 
 var microgame_t = 4.0
 var between_games_t = 4.0
@@ -41,6 +42,8 @@ func _ready():
 
 	start_next_game()
 
+	micro_games.shuffle()
+
 ## start/end microgame ################################################
 
 func start_next_game():
@@ -49,10 +52,19 @@ func start_next_game():
 	await Anim.scale_up_down_up(level_label, 0.8)
 
 	game_container.set_process_mode(PROCESS_MODE_DISABLED)
-	var game_scene = U.rand_of(micro_games)
+
+	var game_scene = get_next_game()
+	if game_scene == null:
+		Log.pr("no next microgame, you win!!")
+		return
 	var game_node = game_scene.instantiate()
 	start_microgame(game_node)
 
+func get_next_game():
+	if game_idx < len(micro_games):
+		var game = micro_games[game_idx]
+		game_idx += 1
+		return game
 
 func start_microgame(game_node):
 	Log.pr("Starting microgame")

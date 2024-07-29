@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://r4m46vr1ic2e"]
 
 [ext_resource type="Script" path="res://src/stage/Stage.gd" id="1_7hh2t"]
-[ext_resource type="PackedScene" path="res://src/microgames/ScaryButtons.tscn" id="2_3f6hm"]
+[ext_resource type="PackedScene" uid="uid://bmvkn6oj6jxm0" path="res://src/microgames/ScaryButtons.tscn" id="2_3f6hm"]
 [ext_resource type="PackedScene" uid="uid://cm5qaab022xay" path="res://src/microgames/ChantToYourGod.tscn" id="2_8i8hl"]
 [ext_resource type="PackedScene" uid="uid://d80fhop3dves" path="res://src/microgames/PrayToYourGod.tscn" id="3_jjqn3"]
 [ext_resource type="PackedScene" uid="uid://xeg1niv7uyo8" path="res://src/microgames/SacrificeVillager.tscn" id="4_t6f5i"]
@@ -16,8 +16,8 @@
 shader = ExtResource("9_onp0o")
 shader_parameter/overlay = false
 shader_parameter/scanlines_opacity = 0.4
-shader_parameter/scanlines_width = 0.25
-shader_parameter/grille_opacity = 0.3
+shader_parameter/scanlines_width = 0.043
+shader_parameter/grille_opacity = 0.116
 shader_parameter/resolution = Vector2(640, 480)
 shader_parameter/pixelate = true
 shader_parameter/roll = true
