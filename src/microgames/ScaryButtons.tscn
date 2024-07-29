@@ -17,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.599422, 0.171431, 0.247636, 1)
+color = Color(0.259736, 0.0833882, 0.521322, 1)
 
 [node name="ScaryButton" type="Button" parent="."]
 offset_left = 848.0
