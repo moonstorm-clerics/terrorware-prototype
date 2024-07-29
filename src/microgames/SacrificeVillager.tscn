@@ -34,59 +34,24 @@ layer_0/tile_data = PackedInt32Array(1572879, 131072, 5, 1572878, 131072, 5, 157
 
 [node name="TDVillager" parent="." instance=ExtResource("5_xa3s0")]
 position = Vector2(380, 257)
-display_name = null
-initial_health = null
-run_speed = null
-wander_speed = null
-jump_speed = null
 
 [node name="TDVillager2" parent="." instance=ExtResource("5_xa3s0")]
 position = Vector2(139, 232)
-display_name = null
-initial_health = null
-run_speed = null
-wander_speed = null
-jump_speed = null
 
 [node name="TDVillager3" parent="." instance=ExtResource("5_xa3s0")]
 position = Vector2(290, 254)
-display_name = null
-initial_health = null
-run_speed = null
-wander_speed = null
-jump_speed = null
 
 [node name="TDVillager4" parent="." instance=ExtResource("5_xa3s0")]
 position = Vector2(320, 227)
-display_name = null
-initial_health = null
-run_speed = null
-wander_speed = null
-jump_speed = null
 
 [node name="TDVillager5" parent="." instance=ExtResource("5_xa3s0")]
 position = Vector2(339, 233)
-display_name = null
-initial_health = null
-run_speed = null
-wander_speed = null
-jump_speed = null
 
 [node name="TDVillager6" parent="." instance=ExtResource("5_xa3s0")]
 position = Vector2(183, 225)
-display_name = null
-initial_health = null
-run_speed = null
-wander_speed = null
-jump_speed = null
 
 [node name="TDVillager7" parent="." instance=ExtResource("5_xa3s0")]
 position = Vector2(110, 225)
-display_name = null
-initial_health = null
-run_speed = null
-wander_speed = null
-jump_speed = null
 
 [node name="TDHairo" parent="." instance=ExtResource("6_isnyu")]
 position = Vector2(243, 147)

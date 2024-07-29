@@ -17,7 +17,7 @@ func _get_configuration_warnings():
 # input vars
 
 @export var display_name: String
-@export var initial_health: int = 6
+@export var initial_health: int = 3
 
 @export var run_speed: float = 10000
 @export var wander_speed: float = 6000
@@ -33,8 +33,8 @@ func _get_configuration_warnings():
 
 var move_vector: Vector2
 var facing_vector: Vector2
-var health
-var is_dead
+var health = 3
+var is_dead = false
 var following
 var grabbed_by
 
@@ -44,6 +44,8 @@ var grabbed_by
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $TDNPCMachine
 @onready var state_label = $StateLabel
+
+var name_label
 
 var action_detector
 var action_hint
@@ -78,6 +80,7 @@ func _ready():
 		heart_particles="HeartParticles",
 		skull_particles="SkullParticles",
 		pit_detector="PitDetector",
+		name_label="NameLabel",
 
 		action_detector="ActionDetector",
 		action_hint="ActionHint",
@@ -99,6 +102,14 @@ func _ready():
 		skull_particles.set_emitting(false)
 
 	machine.transitioned.connect(_on_transit)
+
+	# useful to flip when debugging state machines
+	state_label.set_visible(false)
+
+	if not display_name:
+		display_name = U.rand_of(["Fred", "George", "Ron", "Bill", "Percy", "Charlie", "Ginny"])
+	if display_name:
+		name_label.text = "[center]%s[/center]" % display_name
 
 	set_collision_layer_value(1, false) # walls,doors,env
 	set_collision_layer_value(10, true) # npc

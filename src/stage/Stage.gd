@@ -5,7 +5,7 @@ class_name Stage
 
 @onready var directive_label = $%DirectiveLabel
 @onready var outcome_label = $%OutcomeLabel
-@onready var level_label = $%LevelLabel
+# @onready var level_label = $%LevelLabel
 @onready var lives_label = $%LivesLabel
 
 @onready var microgame_ui = $%MicroGameUI
@@ -30,7 +30,8 @@ var lost_count = 0
 var lives = 4
 
 var villagers = []
-@onready var player = $%Player
+# @onready var player = $%Player
+@onready var camera = $%Camera2D
 
 ## ready ################################################
 
@@ -38,7 +39,8 @@ func _ready():
 	Log.pr("stage ready.....")
 	outcome_label.set_visible(false)
 
-	setup_follows()
+	find_villagers()
+	lives = len(villagers)
 
 	start_next_game()
 
@@ -48,8 +50,8 @@ func _ready():
 
 func start_next_game():
 	# starting a micro game animation!
-	level_label.text = "[center]# %s[/center]" % (won_count + lost_count + 1)
-	await Anim.scale_up_down_up(level_label, 0.8)
+	# level_label.text = "[center]Task # %s[/center]" % (won_count + lost_count + 1)
+	# await Anim.scale_up_down_up(level_label, 0.8)
 
 	game_container.set_process_mode(PROCESS_MODE_DISABLED)
 
@@ -79,12 +81,13 @@ func start_microgame(game_node):
 		stage_ui.set_visible(false)
 		village.set_visible(false)
 		village.set_process_mode(PROCESS_MODE_DISABLED)
-		player.camera.set_enabled(false))
+		camera.set_enabled(false)
+		)
 
 	# show directive and game-splash for 2s
 	microgame_ui.set_visible(true)
 	await Anim.fade_in(directive_label, 1.0)
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(0.6).timeout
 	await Anim.fade_out(directive_label, 0.4)
 	microgame_ui.set_visible(false)
 
@@ -119,7 +122,7 @@ func exit_microgame():
 
 	# switch back to STAGE mode
 	state = State.STAGE
-	player.camera.set_enabled(true)
+	camera.set_enabled(true)
 	village.set_process_mode(PROCESS_MODE_INHERIT)
 	stage_ui.set_visible(true)
 	village.set_visible(true)
@@ -130,7 +133,7 @@ func exit_microgame():
 	match outcome:
 		MicroGame.Outcome.WON:
 			won_count += 1
-			player.machine.transit("Jump") # celebrate
+			villagers_celebrate()
 		MicroGame.Outcome.LOST:
 			lost_count += 1
 			drop_villager()
@@ -139,7 +142,7 @@ func exit_microgame():
 	microgame = null
 
 	Log.pr("won", won_count, "lost", lost_count)
-	lives_label.text = "[center]Lives: %s[/center]" % (lives - lost_count)
+	lives_label.text = "[center]Cult size: %s[/center]" % (lives - lost_count)
 
 	# wait a bit before starting again
 	await get_tree().create_timer(between_games_t).timeout
@@ -156,7 +159,7 @@ func setup_microgame(node):
 	mg.game_won.connect(on_game_won, CONNECT_DEFERRED)
 	mg.game_lost.connect(on_game_lost, CONNECT_DEFERRED)
 
-	directive_label.text = "[center]%s[/center]" % mg.directive
+	directive_label.text = "[center]Task %s: %s[/center]" % [won_count + lost_count + 1, mg.directive]
 
 	return mg
 
@@ -187,6 +190,16 @@ func update_outcome_label(outcome):
 
 ## villager follows ###########################################
 
+func villagers_celebrate():
+	for v in villagers:
+		v.machine.transit("Jump")
+
+func villagers_sad():
+	for v in villagers:
+		v.machine.transit("Thrown", {
+			direction=U.rand_of([Vector2.LEFT, Vector2.RIGHT]),
+			})
+
 func drop_villager():
 	if not villagers.is_empty():
 		var rand = U.rand_of(villagers)
@@ -194,9 +207,10 @@ func drop_villager():
 		await Anim.fade_out(rand)
 		rand.queue_free()
 
-		# wait a tick
+		# wait a bit
 		await get_tree().create_timer(0.3).timeout
-		setup_follows.call_deferred()
+		find_villagers()
+		villagers_sad()
 	else:
 		# TODO animate player death
 		# handle game over
@@ -204,13 +218,3 @@ func drop_villager():
 
 func find_villagers():
 	villagers = U.get_children_in_group(self, "npcs")
-
-func setup_follows():
-	find_villagers()
-	var last = null
-	for vil in villagers:
-		if last == null:
-			vil.follow_entity(player)
-		else:
-			vil.follow_entity(last)
-		last = vil
