@@ -7,9 +7,8 @@ var button_defs = [
 		fn=Navi.resume,
 	},
 	{
-		label="Dino Menu",
-		fn=Navi.nav_to_main_menu,
-		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
+		label="Restart",
+		fn=Navi.nav_to.bind("res://src/stage/Stage.tscn"),
 	},
 	{
 		label="Quit Game",

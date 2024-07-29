@@ -18,11 +18,15 @@ func _ready():
 	if first.scene_file_path == main_scene_path:
 		first_scene = first
 
+	set_pause_menu("res://addons/core/navi/NaviPauseMenu.tscn")
+	set_win_menu("res://addons/core/navi/NaviWinMenu.tscn")
+	set_death_menu("res://addons/core/navi/NaviDeathMenu.tscn")
+
 ## input ###################################################################
 
-# func _unhandled_input(event):
-# 	if not Engine.is_editor_hint() and Trolls.is_pause(event):
-# 		Navi.toggle_pause()
+func _unhandled_input(event):
+	if not Engine.is_editor_hint() and Trolls.is_pause(event):
+		Navi.toggle_pause()
 
 ## process ###################################################################
 

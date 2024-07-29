@@ -26,7 +26,7 @@ alignment = 1
 
 [node name="HeroLabel" parent="PanelContainer/CenterContainer/VBoxContainer" instance=ExtResource("3")]
 layout_mode = 2
-text = "[center]Death"
+text = "[center]Game Over"
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
