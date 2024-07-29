@@ -72,28 +72,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/StageUI/VBoxContainer"]
-visible = false
-layout_mode = 2
-
-[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/StageUI/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="LevelLabel" type="RichTextLabel" parent="CanvasLayer/StageUI/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(600, 0)
-layout_mode = 2
-theme_type_variation = &"HeroTextLabel"
-bbcode_enabled = true
-text = "[center]Task 0[/center]"
-fit_content = true
-scroll_active = false
-
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/StageUI/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/StageUI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -142,6 +120,27 @@ fit_content = true
 scroll_active = false
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/StageUI/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/StageUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/StageUI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ChallengesLabel" type="RichTextLabel" parent="CanvasLayer/StageUI/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_type_variation = &"HeroTextLabel"
+bbcode_enabled = true
+text = "[center]Remaining tasks 4[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/StageUI/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 

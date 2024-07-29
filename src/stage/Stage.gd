@@ -5,7 +5,7 @@ class_name Stage
 
 @onready var directive_label = $%DirectiveLabel
 @onready var outcome_label = $%OutcomeLabel
-# @onready var level_label = $%LevelLabel
+@onready var challenges_label = $%ChallengesLabel
 @onready var lives_label = $%LivesLabel
 
 @onready var microgame_ui = $%MicroGameUI
@@ -24,10 +24,10 @@ enum State {STAGE, MICROGAME}
 
 var state = State.STAGE
 var microgame: MicroGame
+var microgame_packed_scene: PackedScene
 
 var won_count = 0
 var lost_count = 0
-var lives = 4
 
 var villagers = []
 # @onready var player = $%Player
@@ -36,15 +36,19 @@ var villagers = []
 ## ready ################################################
 
 func _ready():
+	randomize() # randomize seed
+	micro_games.shuffle()
+
 	Log.pr("stage ready.....")
 	outcome_label.set_visible(false)
 
 	find_villagers()
-	lives = len(villagers)
+
+	lives_label.text = "[center]Cult size: %s[/center]" % len(villagers)
+	challenges_label.text = "[center]Remaining tasks: %s[/center]" % (len(micro_games) - game_idx)
+	directive_label.text = "[center]Welcome to the cult![/center]"
 
 	start_next_game()
-
-	micro_games.shuffle()
 
 ## start/end microgame ################################################
 
@@ -53,13 +57,15 @@ func start_next_game():
 	# level_label.text = "[center]Task # %s[/center]" % (won_count + lost_count + 1)
 	# await Anim.scale_up_down_up(level_label, 0.8)
 
+	await get_tree().create_timer(2.0).timeout
+
 	game_container.set_process_mode(PROCESS_MODE_DISABLED)
 
-	var game_scene = get_next_game()
-	if game_scene == null:
-		Log.pr("no next microgame, you win!!")
+	microgame_packed_scene = get_next_game()
+	if microgame_packed_scene == null:
+		Navi.show_win_menu()
 		return
-	var game_node = game_scene.instantiate()
+	var game_node = microgame_packed_scene.instantiate()
 	start_microgame(game_node)
 
 func get_next_game():
@@ -135,14 +141,22 @@ func exit_microgame():
 			won_count += 1
 			villagers_celebrate()
 		MicroGame.Outcome.LOST:
+			# if you lose, you have to play it again!
+			micro_games.append(microgame_packed_scene)
 			lost_count += 1
-			drop_villager()
+			await drop_villager()
 		_: Log.warn("Unhandled game outcome: ", outcome)
 
 	microgame = null
+	microgame_packed_scene = null
 
 	Log.pr("won", won_count, "lost", lost_count)
-	lives_label.text = "[center]Cult size: %s[/center]" % (lives - lost_count)
+	lives_label.text = "[center]Cult size: %s[/center]" % len(villagers)
+	challenges_label.text = "[center]Remaining tasks: %s[/center]" % (len(micro_games) - game_idx)
+
+	if villagers.is_empty():
+		Navi.show_death_menu()
+		return
 
 	# wait a bit before starting again
 	await get_tree().create_timer(between_games_t).timeout
@@ -211,10 +225,6 @@ func drop_villager():
 		await get_tree().create_timer(0.3).timeout
 		find_villagers()
 		villagers_sad()
-	else:
-		# TODO animate player death
-		# handle game over
-		Log.pr("Game over!")
 
 func find_villagers():
 	villagers = U.get_children_in_group(self, "npcs")
