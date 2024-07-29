@@ -250,7 +250,8 @@ func take_damage(opts):
 ## pits ###################################################################
 
 func on_pit_entered():
-	machine.transit("Fall")
+	if not machine.state.name in ["Fall", "Dead"]:
+		machine.transit("Fall")
 
 ## recover health ###########################################################
 
