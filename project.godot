@@ -39,6 +39,12 @@ movie_writer/movie_file="/home/russ/moonstorm-clerics/terrorware-prototype/clips
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/log/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://addons/core/": "orange"
+}
+
 [gui]
 
 theme/custom="res://src/DefaultTheme.tres"

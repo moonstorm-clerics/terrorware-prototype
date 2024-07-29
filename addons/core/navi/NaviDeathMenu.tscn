@@ -26,7 +26,13 @@ alignment = 1
 
 [node name="HeroLabel" parent="PanelContainer/CenterContainer/VBoxContainer" instance=ExtResource("3")]
 layout_mode = 2
-text = "[center]Game Over"
+text = "[center]Game Over!
+The last sheep have been lost.
+Your cult fades forever from the world."
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
