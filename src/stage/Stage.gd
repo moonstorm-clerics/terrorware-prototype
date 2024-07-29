@@ -17,7 +17,7 @@ class_name Stage
 var game_idx = 0
 
 var microgame_t = 4.0
-var between_games_t = 4.0
+var between_games_t = 3.0
 var transition_t = 0.8
 
 enum State {STAGE, MICROGAME}
@@ -48,6 +48,7 @@ func _ready():
 	challenges_label.text = "[center]Remaining tasks: %s[/center]" % (len(micro_games) - game_idx)
 	directive_label.text = "[center]Welcome to the cult![/center]"
 
+	await get_tree().create_timer(2.0).timeout
 	start_next_game()
 
 ## start/end microgame ################################################
@@ -56,8 +57,6 @@ func start_next_game():
 	# starting a micro game animation!
 	# level_label.text = "[center]Task # %s[/center]" % (won_count + lost_count + 1)
 	# await Anim.scale_up_down_up(level_label, 0.8)
-
-	await get_tree().create_timer(2.0).timeout
 
 	game_container.set_process_mode(PROCESS_MODE_DISABLED)
 
