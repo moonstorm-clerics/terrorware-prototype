@@ -47,3 +47,4 @@ position = Vector2(243, 147)
 [node name="MicroGame" type="Node" parent="."]
 script = ExtResource("8_o5g6a")
 directive = "Sacrifice A Villager!"
+early_exit = true

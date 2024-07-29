@@ -33,3 +33,4 @@ position = Vector2(243, 147)
 [node name="MicroGame" type="Node" parent="."]
 script = ExtResource("7_bi650")
 directive = "Sacrifice Yourself!"
+early_exit = true

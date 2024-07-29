@@ -112,12 +112,20 @@ func start_microgame(game_node):
 	# end game after `microgame_t` seconds
 	get_tree().create_timer(microgame_t).timeout.connect(exit_microgame)
 	reset_progress_timer()
-	do_timer_update()
+	start_timer_update()
 
+var timer_reset = false
 func reset_progress_timer():
 	microgame_progress_bar.value = 0
+	timer_reset = true
+
+func start_timer_update():
+	timer_reset = false
+	do_timer_update()
 
 func do_timer_update():
+	if timer_reset:
+		return
 	var step = microgame_t / 10.0
 	microgame_progress_bar.set_max(microgame_t)
 	microgame_progress_bar.value += step
@@ -135,6 +143,7 @@ func exit_microgame():
 	Log.pr("Exiting microgame", microgame)
 
 	# TODO time up! sound
+	reset_progress_timer()
 
 	var outcome = microgame.outcome
 	update_outcome_label(outcome)
