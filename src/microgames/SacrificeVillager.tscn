@@ -12,6 +12,12 @@
 [node name="SacrificeVillager" type="Node2D"]
 script = ExtResource("1_a7gpj")
 
+[node name="MicroGame" type="Node" parent="."]
+script = ExtResource("8_o5g6a")
+directive = "Sacrifice A Villager!"
+early_exit = true
+control_type = 1
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.67922, 0.399272, 0.399974, 1)
 
@@ -43,8 +49,3 @@ position = Vector2(153, 93)
 
 [node name="TDHairo" parent="." instance=ExtResource("6_isnyu")]
 position = Vector2(243, 147)
-
-[node name="MicroGame" type="Node" parent="."]
-script = ExtResource("8_o5g6a")
-directive = "Sacrifice A Villager!"
-early_exit = true

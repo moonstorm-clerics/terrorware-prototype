@@ -13,6 +13,7 @@ script = ExtResource("1_88stc")
 default_outcome = 0
 directive = "Stay in the shadows!"
 early_exit = true
+control_type = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -60.0

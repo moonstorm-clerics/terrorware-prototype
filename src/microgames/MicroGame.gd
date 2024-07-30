@@ -13,14 +13,16 @@ static func get_microgame(node):
 ## vars ###########################################
 
 enum Outcome {WON, LOST}
+enum ControlType {MOUSE, KEYBOARD}
 
-signal game_finished
+signal exit_game
 signal game_won
 signal game_lost
 
 @export var default_outcome: Outcome = Outcome.LOST
 @export var directive: String = "Do the thing!"
 @export var early_exit: bool = false
+@export var control_type: ControlType = ControlType.MOUSE
 
 var outcome
 
@@ -31,6 +33,7 @@ func _ready():
 		outcome = default_outcome
 	else:
 		outcome = Outcome.LOST
+
 	game_won.connect(on_game_won)
 	game_lost.connect(on_game_lost)
 

@@ -15,15 +15,15 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_utt7d"]
 shader = ExtResource("9_onp0o")
-shader_parameter/overlay = false
+shader_parameter/overlay = true
 shader_parameter/scanlines_opacity = 0.4
 shader_parameter/scanlines_width = 0.043
 shader_parameter/grille_opacity = 0.116
 shader_parameter/resolution = Vector2(640, 480)
-shader_parameter/pixelate = true
+shader_parameter/pixelate = false
 shader_parameter/roll = true
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 15.0
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 8.0
 shader_parameter/roll_variation = 1.8
 shader_parameter/distort_intensity = 0.05
 shader_parameter/noise_opacity = 0.4
@@ -32,7 +32,7 @@ shader_parameter/static_noise_intensity = 0.06
 shader_parameter/aberration = 0.03
 shader_parameter/brightness = 1.4
 shader_parameter/discolor = true
-shader_parameter/warp_amount = 1.0
+shader_parameter/warp_amount = 0.311
 shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
@@ -156,15 +156,31 @@ size_flags_vertical = 3
 
 [node name="MicroGameProgressBar" type="ProgressBar" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_right = 1152.0
-offset_bottom = 20.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -20.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_styles/fill = SubResource("StyleBoxFlat_iqxdu")
 fill_mode = 1
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer"]
-offset_top = 37.0
-offset_right = 1152.0
-offset_bottom = 101.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -32.0
+offset_right = 576.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/HBoxContainer4"]
 custom_minimum_size = Vector2(20, 0)
@@ -186,6 +202,57 @@ scroll_active = false
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/HBoxContainer4"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+
+[node name="Controls" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="MouseControls" type="RichTextLabel" parent="CanvasLayer/Controls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_bottom = 32.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"HeroTextLabel"
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]Controls: Mouse[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="KeyboardControls" type="RichTextLabel" parent="CanvasLayer/Controls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_bottom = 32.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"HeroTextLabel"
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]WASD - move, E - interact[/center]"
+fit_content = true
+scroll_active = false
 
 [node name="Village" type="Node2D" parent="."]
 unique_name_in_owner = true

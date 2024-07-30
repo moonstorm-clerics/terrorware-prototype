@@ -13,6 +13,10 @@ class_name Stage
 @onready var village = $%Village
 @onready var game_container = $%MicroGameContainer
 
+@onready var controls = $%Controls
+@onready var mouse_controls = $%MouseControls
+@onready var keyboard_controls = $%KeyboardControls
+
 @export var micro_games: Array[PackedScene] = []
 var game_idx = 0
 
@@ -37,10 +41,11 @@ var villagers = []
 
 func _ready():
 	# randomize() # randomize seed
-	micro_games.shuffle()
+	# micro_games.shuffle()
 
 	Log.pr("stage ready.....")
 	outcome_label.set_visible(false)
+	controls.set_visible(false)
 
 	find_villagers()
 
@@ -78,6 +83,8 @@ func start_microgame(game_node):
 	state = State.MICROGAME
 
 	microgame = setup_microgame(game_node)
+	controls.set_visible(true)
+	Anim.fade_in(controls, 1.0)
 	await Anim.fade_in(directive_label, 1.0)
 	Log.pr("Entering microgame", microgame)
 
@@ -151,8 +158,10 @@ func exit_microgame():
 	Engine.set_time_scale(0.5)
 
 	# clean up game
+	Anim.fade_out(controls, transition_t)
 	await Anim.fade_out(game_container.get_children()[0], transition_t)
 	U.remove_children(game_container)
+	controls.set_visible(false)
 
 	# end slowmo
 	Engine.set_time_scale(1.0)
@@ -205,6 +214,16 @@ func setup_microgame(node):
 	mg.game_lost.connect(on_game_lost, CONNECT_DEFERRED)
 
 	directive_label.text = "[center]Task %s: %s[/center]" % [won_count + lost_count + 1, mg.directive]
+
+	match mg.control_type:
+		MicroGame.ControlType.KEYBOARD:
+			keyboard_controls.set_visible(true)
+			mouse_controls.set_visible(false)
+		MicroGame.ControlType.MOUSE:
+			mouse_controls.set_visible(true)
+			keyboard_controls.set_visible(false)
+		_:
+			Log.warn("Unhandled microgame control type", mg.control_type)
 
 	return mg
 
