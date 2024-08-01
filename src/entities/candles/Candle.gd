@@ -26,6 +26,8 @@ func _ready():
 	og_scale = light.texture_scale
 	og_energy = light.energy
 
+	update_light()
+
 #################################################################
 # actions
 
