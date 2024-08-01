@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://r4m46vr1ic2e"]
+[gd_scene load_steps=17 format=3 uid="uid://r4m46vr1ic2e"]
 
 [ext_resource type="Script" path="res://src/stage/Stage.gd" id="1_7hh2t"]
 [ext_resource type="PackedScene" uid="uid://bmvkn6oj6jxm0" path="res://src/microgames/ScaryButtons.tscn" id="2_3f6hm"]
 [ext_resource type="PackedScene" uid="uid://de7kalcp5k3vv" path="res://src/microgames/StayInTheShadows.tscn" id="2_6hwmf"]
 [ext_resource type="PackedScene" uid="uid://cm5qaab022xay" path="res://src/microgames/ChantToYourGod.tscn" id="2_8i8hl"]
 [ext_resource type="PackedScene" uid="uid://5voq2r12gcec" path="res://src/microgames/MakeDinner.tscn" id="2_cuysp"]
+[ext_resource type="PackedScene" uid="uid://can1dxnpdr58r" path="res://src/microgames/FindTheNonBeliever.tscn" id="2_lg6r1"]
 [ext_resource type="PackedScene" uid="uid://d80fhop3dves" path="res://src/microgames/PrayToYourGod.tscn" id="3_jjqn3"]
 [ext_resource type="PackedScene" uid="uid://xeg1niv7uyo8" path="res://src/microgames/SacrificeVillager.tscn" id="4_t6f5i"]
 [ext_resource type="PackedScene" uid="uid://ng1abxpgf6hd" path="res://src/microgames/SacrificeYourself.tscn" id="5_1ade2"]
@@ -47,7 +48,7 @@ corner_radius_bottom_left = 8
 
 [node name="Stage" type="Node"]
 script = ExtResource("1_7hh2t")
-micro_games = Array[PackedScene]([ExtResource("2_cuysp"), ExtResource("2_6hwmf"), ExtResource("2_8i8hl"), ExtResource("2_3f6hm"), ExtResource("3_jjqn3"), ExtResource("4_t6f5i"), ExtResource("5_1ade2")])
+micro_games = Array[PackedScene]([ExtResource("2_cuysp"), ExtResource("2_6hwmf"), ExtResource("2_8i8hl"), ExtResource("2_lg6r1"), ExtResource("2_3f6hm"), ExtResource("3_jjqn3"), ExtResource("4_t6f5i"), ExtResource("5_1ade2")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

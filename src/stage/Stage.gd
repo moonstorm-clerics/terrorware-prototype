@@ -232,13 +232,13 @@ func setup_microgame(node):
 func on_game_won():
 	# you win! sound and visual
 	if microgame.early_exit:
-		exit_microgame()
+		exit_microgame.call_deferred()
 	microgame_progress_bar.modulate = Color.GREEN
 
 func on_game_lost():
 	# you lose! sound and visual
 	if microgame.early_exit:
-		exit_microgame()
+		exit_microgame.call_deferred()
 	microgame_progress_bar.modulate = Color.CRIMSON
 
 func update_outcome_label(outcome):
