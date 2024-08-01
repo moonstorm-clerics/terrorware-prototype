@@ -47,12 +47,11 @@ corner_radius_bottom_left = 8
 
 [node name="Stage" type="Node"]
 script = ExtResource("1_7hh2t")
-micro_games = Array[PackedScene]([ExtResource("2_cuysp"), ExtResource("2_6hwmf"), ExtResource("2_3f6hm"), ExtResource("2_8i8hl"), ExtResource("3_jjqn3"), ExtResource("4_t6f5i"), ExtResource("5_1ade2")])
+micro_games = Array[PackedScene]([ExtResource("2_cuysp"), ExtResource("2_6hwmf"), ExtResource("2_8i8hl"), ExtResource("2_3f6hm"), ExtResource("3_jjqn3"), ExtResource("4_t6f5i"), ExtResource("5_1ade2")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="CRTVShader" type="ColorRect" parent="CanvasLayer"]
-visible = false
 material = SubResource("ShaderMaterial_utt7d")
 anchors_preset = 15
 anchor_right = 1.0
@@ -279,6 +278,9 @@ position = Vector2(113, 157)
 
 [node name="TDVillager3" parent="Village" instance=ExtResource("8_pfypn")]
 position = Vector2(264, 179)
+
+[node name="TDVillager4" parent="Village" instance=ExtResource("8_pfypn")]
+position = Vector2(296, 117)
 
 [node name="MicroGameContainer" type="Node" parent="."]
 unique_name_in_owner = true

@@ -40,8 +40,8 @@ var villagers = []
 ## ready ################################################
 
 func _ready():
-	randomize() # randomize seed
-	micro_games.shuffle()
+	# randomize() # randomize seed
+	# micro_games.shuffle()
 
 	Log.pr("stage ready.....")
 	outcome_label.set_visible(false)
