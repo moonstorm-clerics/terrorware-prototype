@@ -9,8 +9,8 @@ var game_won = false
 
 func _ready():
 	non_believer_area.mouse_entered.connect(func():
-		Log.pr("mouse entered!")
 		if not game_won:
+			game_won = true
 			mg.game_won.emit())
 
 func _process(_delta):
