@@ -11,7 +11,7 @@ Much of this code was pulled from
 source code and CC BY-NC-SA for the rest of the assets (those that were pulled
 in, anyway).
 
-© 2022-2024 by Russell Matney
+© 2024 by Russell Matney
 
 The source code is available via the MIT license - go for it!
 
